@@ -1,4 +1,5 @@
 package util;
+import locale.Strings_zh_CN;
 import model.*;
 import ui.EditorSettingPanel;
 import ui.JEditor;
@@ -166,7 +167,7 @@ public class EditorUtil {
 //        editor.getCurrentFile().save();
         int action = -1;
         if(editor.getCurrentFile().getStatus() == TextFile.Status.UNSAVED){
-            action = JOptionPane.showConfirmDialog(null, "Save " + editor.getEditorTabbedPane().getTitleAt(editor.getEditorTabbedPane().getSelectedIndex()) + "?", "exit", JOptionPane.YES_NO_CANCEL_OPTION);
+            action = JOptionPane.showConfirmDialog(null, Strings_zh_CN.EDITOR_SETTINGS_COMMAND_SAVE + " " + editor.getEditorTabbedPane().getTitleAt(editor.getEditorTabbedPane().getSelectedIndex()) + Strings_zh_CN.QUESTION_MARK, Strings_zh_CN.EDITOR_CLOSE_WINDOW_TITLE, JOptionPane.YES_NO_CANCEL_OPTION);
             if(action == JOptionPane.OK_OPTION)
                 saveFile();
         }
@@ -260,7 +261,7 @@ public class EditorUtil {
             if (fileSaver.getSelectedFile() != null) {
                 int override = 0;
                 if (fileSaver.getSelectedFile().exists()) {
-                    override = JOptionPane.showConfirmDialog(null, "Override file?", "File existed", JOptionPane.YES_NO_OPTION);
+                    override = JOptionPane.showConfirmDialog(null, Strings_zh_CN.EDITOR_SAVE_OVERRIDE_FILE_MESG, Strings_zh_CN.EDITOR_SAVE_OVERRIDE_FILE_TITLE, JOptionPane.YES_NO_OPTION);
                 }
                 if (override == 0)
                     file.setFile(fileSaver.getSelectedFile());
@@ -297,7 +298,7 @@ public class EditorUtil {
     }
 
     public void setTitleWithStatus(TextFile.Status status){
-        editor.getFrame().setTitle(this.editor.getEditorTabbedPane().getTitleAt(this.editor.getEditorTabbedPane().getSelectedIndex()) + ((status == TextFile.Status.UNSAVED) ? " (unsaved)" : ""));
+        editor.getFrame().setTitle(this.editor.getEditorTabbedPane().getTitleAt(this.editor.getEditorTabbedPane().getSelectedIndex()) + ((status == TextFile.Status.UNSAVED) ? Strings_zh_CN.EDITOR_UNSAVED_PLACEHOLDER : ""));
     }
 
 
@@ -374,10 +375,14 @@ public class EditorUtil {
                 allSaved = true;
         }
         if(!allSaved) {
+            /*
             int closeOperation = JOptionPane.showConfirmDialog(null, "Save all files?", "exit", JOptionPane.YES_NO_CANCEL_OPTION);
             switch (closeOperation) {
                 case JOptionPane.OK_OPTION:
-                    saveAll();
+                    for(int i=0; i<editor.getFiles().size(); i++){
+                        setMainEditorTagNum(i);
+                        closeWindow();
+                    }
 
                 case JOptionPane.NO_OPTION:
                     editor.getFrame().dispose();
@@ -386,7 +391,11 @@ public class EditorUtil {
 
                 case JOptionPane.CANCEL_OPTION:
                     break;
-
+            */
+            int fileNum = editor.getFiles().size();
+            for(int i=0; i<fileNum; i++){
+                setMainEditorTagNum(0);
+                closeWindow();
             }
         }   else{
             editor.exit();

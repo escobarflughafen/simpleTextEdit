@@ -18,7 +18,7 @@
           <size top="8" left="24" bottom="0" right="24"/>
         </border>
         <children>
-          <grid id="9a937" layout-manager="GridBagLayout">
+          <grid id="9a937" binding="fontSettingsPanel" layout-manager="GridBagLayout">
             <constraints border-constraint="North"/>
             <properties/>
             <border type="none" title="Font Settings">
@@ -34,7 +34,7 @@
                   <preferredSize width="128" height="27"/>
                 </properties>
               </component>
-              <component id="721f3" class="javax.swing.JLabel">
+              <component id="721f3" class="javax.swing.JLabel" binding="fontStyleLabel">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="0.0"/>
@@ -55,7 +55,7 @@
                   <preferredSize width="72" height="27"/>
                 </properties>
               </component>
-              <component id="533f8" class="javax.swing.JLabel">
+              <component id="533f8" class="javax.swing.JLabel" binding="fontSizeLabel">
                 <constraints>
                   <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="0.0"/>
@@ -66,7 +66,7 @@
                   <text value="Font size"/>
                 </properties>
               </component>
-              <component id="43e84" class="javax.swing.JLabel">
+              <component id="43e84" class="javax.swing.JLabel" binding="fontLabel">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="0.0"/>
@@ -88,14 +88,14 @@
               </component>
             </children>
           </grid>
-          <grid id="72099" layout-manager="GridBagLayout">
+          <grid id="72099" binding="editorAppearancePanel" layout-manager="GridBagLayout">
             <constraints border-constraint="Center"/>
             <properties/>
             <border type="none" title="Editor Appearance">
               <font style="1"/>
             </border>
             <children>
-              <component id="9f0b6" class="javax.swing.JLabel">
+              <component id="9f0b6" class="javax.swing.JLabel" binding="fgLabel">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="0.0"/>
@@ -106,7 +106,7 @@
                   <text value="Foreground color"/>
                 </properties>
               </component>
-              <component id="4f092" class="javax.swing.JLabel">
+              <component id="4f092" class="javax.swing.JLabel" binding="bgLabel">
                 <constraints>
                   <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="0.0"/>

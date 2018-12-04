@@ -1,5 +1,6 @@
 package ui;
 
+import locale.Strings_zh_CN;
 import model.TextFile;
 
 import javax.swing.*;
@@ -34,13 +35,14 @@ public class WordCount {
     }
 
     public WordCount(int posX, int posY, JEditor editor) {
+        OKButton.setText(Strings_zh_CN.MENU_TOOLS_WORDCOUNT_COMMAND_CLOSE);
         this.editor = editor;
         String[] headers = {"", ""};
         this.wcTable.setModel(new DefaultTableModel(headers, 4));
-        wcTable.getModel().setValueAt("Words", 0, 0);
-        wcTable.getModel().setValueAt("Characters", 1, 0);
-        wcTable.getModel().setValueAt("Characters (selected)", 2, 0);
-        wcTable.getModel().setValueAt("Lines", 3, 0);
+        wcTable.getModel().setValueAt(Strings_zh_CN.MENU_TOOLS_WORDCOUNT_WORDS_LABEL, 0, 0);
+        wcTable.getModel().setValueAt(Strings_zh_CN.MENU_TOOLS_WORDCOUNT_CHARACTERS_LABEL, 1, 0);
+        wcTable.getModel().setValueAt(Strings_zh_CN.MENU_TOOLS_WORDCOUNT_CHASELECTED_LABEL, 2, 0);
+        wcTable.getModel().setValueAt(Strings_zh_CN.MENU_TOOLS_WORDCOUNT_LINES_LABEL, 3, 0);
         wcTable.setEnabled(false);
         OKButton.addActionListener(new ActionListener() {
             @Override
@@ -53,7 +55,7 @@ public class WordCount {
         wcTable.getModel().setValueAt(String.valueOf(abs_INT(editor.getMainEditorPane().getSelectionStart() - editor.getMainEditorPane().getSelectionEnd())), 2, 1);
         wcTable.getModel().setValueAt(editor.getMainEditorPane().getLineCount(), 3, 1);
 
-        final JFrame frame = new JFrame("Word Count");
+        final JFrame frame = new JFrame(Strings_zh_CN.MENU_TOOLS_WORDCOUNT_TITLE);
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setMinimumSize(new Dimension(320, 240));

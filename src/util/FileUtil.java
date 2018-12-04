@@ -13,7 +13,6 @@ public class FileUtil {
     }
 
     public int wc(){
-
         editor.getCurrentFile().getCounter().setFsize(editor.getMainEditorPane().getText().length());
         editor.getCurrentFile().getCounter().setDiff(editor.getCurrentFile().getCounter().getDiff() + 1);
         return editor.getMainEditorPane().getText().length();

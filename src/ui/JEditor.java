@@ -1,6 +1,7 @@
 package ui;
 
 
+import locale.Strings_zh_CN;
 import model.TextFile;
 import util.EditorUtil;
 import util.FileUtil;
@@ -66,6 +67,10 @@ public class JEditor {
 
 
     public JEditor() {
+        newButton.setText(Strings_zh_CN.EDITOR_SETTINGS_COMMAND_NEW);
+        openButton.setText(Strings_zh_CN.EDITOR_SETTINGS_COMMAND_OPEN);
+        saveButton.setText(Strings_zh_CN.EDITOR_SETTINGS_COMMAND_SAVE);
+
         this.editorUtil = new EditorUtil(this);
         this.fileUtil = new FileUtil(this);
         this.files = new Vector<TextFile>();
@@ -178,7 +183,7 @@ public class JEditor {
             }
         });
         // Create Placeholder for Searchbox
-        editorUtil.addPlaceholderTo(searchTextField, "Search...");
+        editorUtil.addPlaceholderTo(searchTextField, Strings_zh_CN.EDITOR_SEARCHBOX_PLACEHOLDER);
 
 
         textEditorPane.addCaretListener(new CaretListener() {
@@ -194,7 +199,7 @@ public class JEditor {
                     }
                     int lineNum = textEditorPane.getLineOfOffset(textEditorPane.getCaretPosition());
                     int columnNum = textEditorPane.getCaretPosition() - textEditorPane.getLineStartOffset(lineNum);
-                    cursorIndicatorLabel.setText("ln " + Integer.valueOf(lineNum + 1) + ", col " + Integer.valueOf(columnNum + 1));
+                    cursorIndicatorLabel.setText(Strings_zh_CN.EDITOR_POSITION_INDICATOR_LN + " " + Integer.valueOf(lineNum + 1) + Strings_zh_CN.EDITOR_POSITION_INDICATOR_COMMA_SEPERATOR + Strings_zh_CN.EDITOR_POSITION_INDICATOR_COL + " " + Integer.valueOf(columnNum + 1));
                    
                 } catch (BadLocationException ex) {
                     ex.printStackTrace();
@@ -273,56 +278,56 @@ public class JEditor {
         settingsToolBarScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         settingsToolBarScrollPane.getHorizontalScrollBar().setSize(0, 0);
         menuBar = new JMenuBar();
-        menuBar.add(new JMenu("File"));
-        menuBar.getMenu(0).add(new JMenuItem("New")).addActionListener(new ActionListener() {
+        menuBar.add(new JMenu(Strings_zh_CN.MENU_FILE));
+        menuBar.getMenu(0).add(new JMenuItem(Strings_zh_CN.MENU_FILE_NEW)).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                editorUtil.newWindow(new TextFile(new File("Untitled")));
+                editorUtil.newWindow(new TextFile());
             }
         });
-        menuBar.getMenu(0).add(new JMenuItem("Open")).addActionListener(new ActionListener() {
+        menuBar.getMenu(0).add(new JMenuItem(Strings_zh_CN.MENU_FILE_OPEN)).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 editorUtil.ExplorerToOpenFile();
             }
         });
         menuBar.getMenu(0).addSeparator();
-        menuBar.getMenu(0).add(new JMenuItem("Save")).addActionListener(new ActionListener() {
+        menuBar.getMenu(0).add(new JMenuItem(Strings_zh_CN.MENU_FILE_SAVE)).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 editorUtil.saveFile();
             }
         });
-        menuBar.getMenu(0).add(new JMenuItem("Save As...")).addActionListener(new ActionListener() {
+        menuBar.getMenu(0).add(new JMenuItem(Strings_zh_CN.MENU_FILE_SAVEAS)).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 editorUtil.ExplorerToSaveFile(currentFile);
             }
         });
-        menuBar.getMenu(0).add(new JMenuItem("Save All")).addActionListener(new ActionListener() {
+        menuBar.getMenu(0).add(new JMenuItem(Strings_zh_CN.MENU_FILE_SAVEAS)).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 editorUtil.saveAll();
             }
         });
         menuBar.getMenu(0).addSeparator();
-        menuBar.getMenu(0).add(new JMenuItem("Exit")).addActionListener(new ActionListener() {
+        menuBar.getMenu(0).add(new JMenuItem(Strings_zh_CN.MENU_FILE_EXIT)).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 editorUtil.editorExit();
             }
         });
 
-        menuBar.add(new JMenu("Edit"));
-        menuBar.getMenu(1).add(new JMenuItem("Undo")).addActionListener(new ActionListener() {
+        menuBar.add(new JMenu(Strings_zh_CN.MENU_EDIT));
+        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_UNDO)).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
             }
         });
-        menuBar.getMenu(1).add(new JMenuItem("Redo"));
+        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_REDO));
         menuBar.getMenu(1).addSeparator();
-        JMenuItem cut = menuBar.getMenu(1).add(new JMenuItem("Cut"));
+        JMenuItem cut = menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_CUT));
         cut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -330,34 +335,34 @@ public class JEditor {
             }
         });
 
-        menuBar.getMenu(1).add(new JMenuItem("Copy")).addActionListener(new ActionListener() {
+        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_COPY)).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 textEditorPane.copy();
             }
         });
 
-        menuBar.getMenu(1).add(new JMenuItem("Paste")).addActionListener(new ActionListener() {
+        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_PASTE)).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 textEditorPane.paste();
             }
         });
         menuBar.getMenu(1).addSeparator();
-        menuBar.getMenu(1).add(new JMenuItem("Find..."));
-        menuBar.getMenu(1).add(new JMenuItem("Find Next"));
-        menuBar.getMenu(1).add(new JMenuItem("Find Previous"));
-        menuBar.getMenu(1).add(new JMenuItem("Replace..."));
-        JMenu transformationMenu = new JMenu("Transformations");
+        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FIND));
+        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FINDNEXT));
+        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FINDPREV));
+        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_REPLACE));
+        JMenu transformationMenu = new JMenu(Strings_zh_CN.MENU_EDIT_TRANSFORMATIONS);
         menuBar.getMenu(1).add(transformationMenu);
-        transformationMenu.add(new JMenuItem("Uppercase")).addActionListener(new ActionListener() {
+        transformationMenu.add(new JMenuItem(Strings_zh_CN.MENU_EDIT_TRANSFORMATIONS_UPPERCASE)).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String uppercased = textEditorPane.getSelectedText().toUpperCase();
                 editorUtil.replaceWith(uppercased);
             }
         });
-        transformationMenu.add(new JMenuItem("Lowercase")).addActionListener(new ActionListener() {
+        transformationMenu.add(new JMenuItem(Strings_zh_CN.MENU_EDIT_TRANSFORMATIONS_LOWERCASE)).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String lowercased = textEditorPane.getSelectedText().toLowerCase();
@@ -365,31 +370,31 @@ public class JEditor {
             }
         });
         menuBar.getMenu(1).addSeparator();
-        JMenuItem jmpTo = new JMenuItem("Jump to...");
+        JMenuItem jmpTo = new JMenuItem(Strings_zh_CN.MENU_EDIT_JUMPTO);
         menuBar.getMenu(1).add(jmpTo);
         jmpTo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int value = Integer.valueOf(JOptionPane.showInputDialog(null, "Editor caret jump to:", "Jump to", JOptionPane.QUESTION_MESSAGE));
+                int value = Integer.valueOf(JOptionPane.showInputDialog(null, Strings_zh_CN.MENU_EDIT_JUMPTO_MESG, Strings_zh_CN.MENU_EDIT_JUMPTO_TITLE, JOptionPane.QUESTION_MESSAGE));
                 editorUtil.caretJumpTo(value);
             }
         });
 
-        menuBar.add(new JMenu("Tools"));
-        menuBar.getMenu(2).add(new JMenuItem("Editor Settings...")).addActionListener(new ActionListener() {
+        menuBar.add(new JMenu(Strings_zh_CN.MENU_TOOLS));
+        menuBar.getMenu(2).add(new JMenuItem(Strings_zh_CN.MENU_TOOLS_EDITORSETTINGS)).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 editorUtil.openEditorSetting();
             }
         });
-        menuBar.getMenu(2).add(new JMenuItem("Word Count...")).addActionListener(new ActionListener() {
+        menuBar.getMenu(2).add(new JMenuItem(Strings_zh_CN.MENU_TOOLS_WORDCOUNT)).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 editorUtil.openWordCounter();
             }
         });
         menuBar.getMenu(2).addSeparator();
-        final JCheckBoxMenuItem ast = new JCheckBoxMenuItem("Auto Save");
+        final JCheckBoxMenuItem ast = new JCheckBoxMenuItem(Strings_zh_CN.MENU_TOOLS_AUTOSAVE);
         ast.setState(true);
         menuBar.getMenu(2).add(ast);
         ast.addActionListener(new ActionListener() {
@@ -398,7 +403,7 @@ public class JEditor {
                 isAutosaveToggled = ast.getState();
             }
         });
-        final JCheckBoxMenuItem lwt = new JCheckBoxMenuItem("Line Wrap");
+        final JCheckBoxMenuItem lwt = new JCheckBoxMenuItem(Strings_zh_CN.MENU_TOOLS_LINEWRAP);
         lwt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -408,8 +413,8 @@ public class JEditor {
         lwt.setState(true);
         menuBar.getMenu(2).add(lwt);
 
-        menuBar.add(new JMenu("Help"));
-        menuBar.getMenu(3).add(new JMenuItem("About...")).addActionListener(new ActionListener() {
+        menuBar.add(new JMenu(Strings_zh_CN.MENU_HELP));
+        menuBar.getMenu(3).add(new JMenuItem(Strings_zh_CN.MENU_HELP_ABOUT)).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 editorUtil.about();
