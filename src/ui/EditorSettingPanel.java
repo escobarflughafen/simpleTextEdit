@@ -76,9 +76,9 @@ public class EditorSettingPanel {
         previewEditorPane.setLineWrap(true);
         try {
             if (editor.getMainEditorPane().getSelectionStart() - editor.getMainEditorPane().getSelectionEnd() != 0) {
-                previewEditorPane.setText((editor.getMainEditorPane().getSelectedText().length() > 24) ? editor.getMainEditorPane().getSelectedText().substring(0, 24) : editor.getMainEditorPane().getSelectedText() + "\n测试文本\nPreview123456");
+                previewEditorPane.setText((editor.getMainEditorPane().getSelectedText().length() > 36) ? editor.getMainEditorPane().getSelectedText().substring(0, 36) : editor.getMainEditorPane().getSelectedText() + "\n测试文本\nPreview123456");
             } else {
-                previewEditorPane.setText((editor.getMainEditorPane().getText().length() > 24) ? editor.getMainEditorPane().getText(0, 24) : editor.getMainEditorPane().getText() + "\n测试文本\nPreview123456");
+                previewEditorPane.setText((editor.getMainEditorPane().getText().length() > 36) ? editor.getMainEditorPane().getText(0, 36) : editor.getMainEditorPane().getText() + "\n测试文本\nPreview123456");
             }
         } catch (BadLocationException e) {
             previewEditorPane.setText("测试文本\nPreview123456");

@@ -155,7 +155,7 @@ public class JEditor {
             @Override
             public void keyPressed(KeyEvent e) {
                 super.keyPressed(e);
-
+                editorUtil.setFileStatus(TextFile.Status.UNSAVED);
             }
         });
         textEditorPane.addFocusListener(new FocusAdapter() {
@@ -185,6 +185,7 @@ public class JEditor {
             @Override
             public void caretUpdate(CaretEvent e) {
                 editorUtil.fileAutoSave();
+
                 try {
                     if (textEditorPane.getSelectionStart() != textEditorPane.getSelectionEnd()) {
                         wordCountButton.setText(textEditorPane.getSelectedText().length() + "/" + String.valueOf(fileUtil.wc()));
@@ -194,6 +195,7 @@ public class JEditor {
                     int lineNum = textEditorPane.getLineOfOffset(textEditorPane.getCaretPosition());
                     int columnNum = textEditorPane.getCaretPosition() - textEditorPane.getLineStartOffset(lineNum);
                     cursorIndicatorLabel.setText("ln " + Integer.valueOf(lineNum + 1) + ", col " + Integer.valueOf(columnNum + 1));
+                   
                 } catch (BadLocationException ex) {
                     ex.printStackTrace();
                 }
