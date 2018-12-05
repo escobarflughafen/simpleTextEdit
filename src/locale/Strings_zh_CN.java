@@ -79,6 +79,10 @@ public class Strings_zh_CN {
     public static final String EDITOR_SAVE_OVERRIDE_FILE_MESG = "覆盖文件" + QUESTION_MARK;
     public static final String EDITOR_SAVE_OVERRIDE_FILE_TITLE = "文件已存在";
 
+    public static final String EDITOR_STATUS_SEARCH_TEXT_0 = "查找成功";
+    public static final String EDITOR_STATUS_SEARCH_TEXT_1 = EDITOR_STATUS_SEARCH_TEXT_0 + "：找到 ";
+    public static final String EDITOR_STATUS_SEARCH_TEXT_2 = " 处";
+    public static final String EDITOR_STATUS_SEARCH_NOTFOUND = "查找失败：找不到要查找的内容";
 
 
 }

@@ -150,7 +150,7 @@
                                 <properties/>
                                 <border type="none"/>
                                 <children>
-                                  <component id="214d6" class="javax.swing.JLabel" binding="autosaveLabel">
+                                  <component id="214d6" class="javax.swing.JLabel" binding="statusLabel">
                                     <constraints border-constraint="Center"/>
                                     <properties>
                                       <horizontalAlignment value="0"/>

@@ -11,6 +11,8 @@ import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.HashMap;
@@ -40,7 +42,9 @@ public class EditorUtil {
 
     }};
 
-
+    public boolean isEditorSelected(){
+        return editor.getMainEditorPane().getSelectionStart() != editor.getMainEditorPane().getSelectionEnd();
+    }
 
     public static Font fonts[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
     public EditorUtil(JEditor editor){
@@ -306,19 +310,42 @@ public class EditorUtil {
         editor.getMainEditorPane().setCaretPosition(pos);
     }
 
-    public int search(String text, String pattern){
-        int pos;
-        pos = Pattern.compile(pattern).matcher(text).end();
-        return 0;
+
+    //basic search function
+    public static int search(String text, String pattern){
+        int pos = -1;
+
+            int charCount = 0;
+            String lines[] = text.split("(\r\n|\r|\n)");
+            for(int i=0; i<lines.length; i++){
+                if(lines[i].indexOf(pattern) != -1){
+                    charCount += lines[i].indexOf(pattern);
+                    pos = charCount;
+                    break;
+                }
+                charCount += lines[i].length() + 1;
+            }
+
+
+        return pos;
     }
-
+    //find first occurrence
     public int searchInRange(String pattern, int from, int to){
-        int pos = 0;
+        int pos = -1;
         try {
+            int charCount = 0;
             String text = editor.getMainEditorPane().getText(from, to - from);
-            System.out.println(Pattern.compile("(.*)" + pattern + "(.*)").matcher(text).start());
-
-
+            String lines[] = editor.getMainEditorPane().getText().split("(\r\n|\r|\n)");
+            for(int i=0; i<lines.length; i++){
+                charCount += lines[i].length() + 1;
+                if(lines[i].contains(pattern)){
+                    charCount += lines[i].indexOf(pattern);
+                    break;
+                }
+            }
+            editor.getMainEditorPane().setSelectionStart(charCount);
+            editor.getMainEditorPane().setSelectionEnd(charCount + pattern.length());
+            pos = charCount;
         }catch (BadLocationException e){
             e.printStackTrace();
         }
@@ -333,6 +360,39 @@ public class EditorUtil {
         return searchInRange(pattern, 0, from);
 
     }
+
+    public int search(String pattern){
+        //String text = (isEditorSelected()) ? editor.getMainEditorPane().getSelectedText() : editor.getMainEditorPane().getText();
+        String text = editor.getMainEditorPane().getText();
+        int pos = search(text, pattern);
+        if(pos != -1) {
+            System.out.println("find at: " + pos);
+            editor.getMainEditorPane().setSelectionStart(pos);
+            editor.getMainEditorPane().setSelectionEnd(pos + pattern.length());
+            editor.getSearchTextField().setBackground(Color.YELLOW);
+            //editor.getStatusLabel().setText(Strings_zh_CN.EDITOR_STATUS_SEARCH_TEXT_0);
+        }   else{
+            editor.getSearchTextField().setBackground(Color.PINK);
+        }
+        return pos;
+    }
+
+    public int search(String pattern, int start){
+        //String text = (isEditorSelected()) ? editor.getMainEditorPane().getSelectedText() : editor.getMainEditorPane().getText();
+        String text = editor.getMainEditorPane().getText().substring(start);
+        int pos = search(text, pattern);
+        if(pos != -1) {
+            editor.getMainEditorPane().setSelectionStart(pos + start);
+            editor.getMainEditorPane().setSelectionEnd(pos + start + pattern.length());
+            editor.getSearchTextField().setBackground(Color.YELLOW);
+            //editor.getStatusLabel().setText(Strings_zh_CN.EDITOR_STATUS_SEARCH_TEXT_0);
+        }   else{
+            editor.getSearchTextField().setBackground(Color.PINK);
+        }
+        return pos + start;
+    }
+
+
 
     public void replaceWith(String text, int start, int end){
         editor.getMainEditorPane().setText(editor.getMainEditorPane().getText().substring(0, start) + text + editor.getMainEditorPane().getText().substring(end));
