@@ -12,6 +12,9 @@ import javax.swing.event.CaretListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
@@ -19,6 +22,7 @@ import java.beans.PropertyChangeListener;
 import java.util.Vector;
 
 public class JEditor {
+    //privatep
     private EditorUtil editorUtil;
     private JFrame frame;
     private JPanel panel1;
@@ -66,6 +70,34 @@ public class JEditor {
     private int continueSearchPos;
 
 
+    private void search(KeyEvent e) {
+        int currentPos = continueSearchPos;
+        if (e.getKeyChar() == '\n') {
+            if (!searchTextField.getText().equals(lastSearch)) {
+                continueSearchPos = 0;
+                lastSearch = searchTextField.getText();
+            }
+            int findAt = editorUtil.search(searchTextField.getText(), currentPos, (currentPos != 0 || currentPos != -1));
+            if (findAt != -1) {
+                searchTextField.setBackground(Color.YELLOW);
+                textEditorPane.setSelectionStart(findAt);
+                textEditorPane.setSelectionEnd(findAt + lastSearch.length());
+                try {
+                    textEditorPane.getHighlighter().removeAllHighlights();
+                    textEditorPane.getHighlighter().addHighlight(findAt, findAt + lastSearch.length(), new DefaultHighlighter.DefaultHighlightPainter(Color.GREEN));
+                } catch (BadLocationException ble) {
+                    ble.printStackTrace();
+                }
+            } else {
+                searchTextField.setBackground(Color.PINK);
+            }
+            continueSearchPos = findAt + lastSearch.length();
+            if (continueSearchPos == -1 || continueSearchPos >= textEditorPane.getText().length()) {
+                continueSearchPos = 0;
+            }
+        }
+    }
+
     public JEditor() {
         lastSearch = "";
         lastSearchPos = 0;
@@ -73,6 +105,14 @@ public class JEditor {
         newButton.setText(Strings_zh_CN.EDITOR_SETTINGS_COMMAND_NEW);
         openButton.setText(Strings_zh_CN.EDITOR_SETTINGS_COMMAND_OPEN);
         saveButton.setText(Strings_zh_CN.EDITOR_SETTINGS_COMMAND_SAVE);
+
+        {
+            DefaultComboBoxModel styleModel = new DefaultComboBoxModel();
+            styleModel.addElement(Strings_zh_CN.FONT_STYLE_REGULAR);
+            styleModel.addElement(Strings_zh_CN.FONT_STYLE_BOLD);
+            styleModel.addElement(Strings_zh_CN.FONT_STYLE_ITALIC + "/" + Strings_zh_CN.FONT_STYLE_OBLIQUE);
+            fontStyleSelectorComboBox.setModel(styleModel);
+        }
 
         this.editorUtil = new EditorUtil(this);
         this.fileUtil = new FileUtil(this);
@@ -84,18 +124,36 @@ public class JEditor {
             public void keyPressed(KeyEvent e) {
                 super.keyPressed(e);
                 searchTextField.setBackground(Color.WHITE);
+                int currentPos = continueSearchPos;
                 if (e.getKeyChar() == '\n') {
                     if (!searchTextField.getText().equals(lastSearch)) {
                         continueSearchPos = 0;
                         lastSearch = searchTextField.getText();
                     }
-                    System.out.println(textEditorPane.getText().substring(continueSearchPos));
-                    continueSearchPos = editorUtil.search(searchTextField.getText(), continueSearchPos) + lastSearch.length();
-                    System.out.println(continueSearchPos);
+                    int findAt = editorUtil.search(searchTextField.getText(), currentPos, (currentPos != 0 || currentPos != -1));
+                    if (findAt != -1) {
+                        searchTextField.setBackground(Color.YELLOW);
+                        textEditorPane.setSelectionStart(findAt);
+                        textEditorPane.setSelectionEnd(findAt + lastSearch.length());
+                        try {
+                            textEditorPane.getHighlighter().removeAllHighlights();
+                            textEditorPane.getHighlighter().addHighlight(findAt, findAt + lastSearch.length(), new DefaultHighlighter.DefaultHighlightPainter(Color.GREEN));
+                        } catch (BadLocationException ble) {
+                            ble.printStackTrace();
+                        }
+                    } else {
+                        searchTextField.setBackground(Color.PINK);
+                    }
+                    continueSearchPos = findAt + lastSearch.length();
                     if (continueSearchPos == -1 || continueSearchPos >= textEditorPane.getText().length()) {
                         continueSearchPos = 0;
                     }
                 }
+
+                //update continueSearchPos
+                // if (e.getKeyChar() == '\n') {
+                //     continueSearchPos = currentPos + searchTextField.getText().length();
+                // }
             }
         });
 
@@ -272,6 +330,7 @@ public class JEditor {
                 super.focusGained(e);
                 continueSearchPos = 0;
                 searchTextField.setBackground(Color.WHITE);
+                textEditorPane.getHighlighter().removeAllHighlights();
             }
         });
         searchTextField.addFocusListener(new FocusAdapter() {
@@ -280,6 +339,7 @@ public class JEditor {
                 super.focusLost(e);
                 continueSearchPos = 0;
                 searchTextField.setBackground(Color.WHITE);
+                textEditorPane.getHighlighter().removeAllHighlights();
             }
         });
     }
@@ -290,7 +350,7 @@ public class JEditor {
         fontColorSelectorComboBox.setToolTipText("select TextEdit's foreground color");
         backgroundSelectorComboBox.setToolTipText("select TextEdit's background color");
         fontStyleSelectorComboBox.setToolTipText("select TextEdit's font style");
-        fontSizeSpinner.setModel(new SpinnerNumberModel(12, 6, 512, 1));
+        fontSizeSpinner.setModel(new SpinnerNumberModel(16, 6, 512, 1));
 
         fontSelectorComboBox.setModel(EditorUtil.getAllFonts2Model());
         fontSelectorComboBox.setSelectedItem("Courier");
@@ -377,10 +437,9 @@ public class JEditor {
             }
         });
         menuBar.getMenu(1).addSeparator();
-        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FIND));
+        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FIND_AND_REPLACE));
         menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FINDNEXT));
         menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FINDPREV));
-        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_REPLACE));
         JMenu transformationMenu = new JMenu(Strings_zh_CN.MENU_EDIT_TRANSFORMATIONS);
         menuBar.getMenu(1).add(transformationMenu);
         transformationMenu.add(new JMenuItem(Strings_zh_CN.MENU_EDIT_TRANSFORMATIONS_UPPERCASE)).addActionListener(new ActionListener() {
@@ -591,6 +650,10 @@ public class JEditor {
         menuBarPanel.setLayout(new BorderLayout(0, 0));
         menuBarPanel.setBackground(new Color(-328966));
         menuPanel.add(menuBarPanel, BorderLayout.WEST);
+        final JPanel panel2 = new JPanel();
+        panel2.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panel2.setBackground(new Color(-328966));
+        menuPanel.add(panel2, BorderLayout.EAST);
         searchTextField = new JTextField();
         Font searchTextFieldFont = this.$$$getFont$$$(null, -1, 12, searchTextField.getFont());
         if (searchTextFieldFont != null) searchTextField.setFont(searchTextFieldFont);
@@ -598,7 +661,7 @@ public class JEditor {
         searchTextField.setPreferredSize(new Dimension(256, 27));
         searchTextField.setText("");
         searchTextField.setToolTipText("Search...");
-        menuPanel.add(searchTextField, BorderLayout.EAST);
+        panel2.add(searchTextField, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         EditorWindowPanel = new JPanel();
         EditorWindowPanel.setLayout(new BorderLayout(0, 0));
         EditorWindowPanel.setMinimumSize(new Dimension(240, 240));
@@ -635,12 +698,12 @@ public class JEditor {
         statusToolBar.setMinimumSize(new Dimension(428, 24));
         statusToolBar.setPreferredSize(new Dimension(428, 24));
         removableEditorPane.add(statusToolBar, BorderLayout.SOUTH);
-        final JPanel panel2 = new JPanel();
-        panel2.setLayout(new BorderLayout(0, 0));
-        statusToolBar.add(panel2);
+        final JPanel panel3 = new JPanel();
+        panel3.setLayout(new BorderLayout(0, 0));
+        statusToolBar.add(panel3);
         toolBarLeftPanel = new JPanel();
         toolBarLeftPanel.setLayout(new BorderLayout(0, 0));
-        panel2.add(toolBarLeftPanel, BorderLayout.WEST);
+        panel3.add(toolBarLeftPanel, BorderLayout.WEST);
         wordCountButton = new JButton();
         wordCountButton.setActionCommand("");
         wordCountButton.setHorizontalTextPosition(0);
@@ -650,7 +713,7 @@ public class JEditor {
         toolBarLeftPanel.add(wordCountButton, BorderLayout.CENTER);
         toolBarRightPanel = new JPanel();
         toolBarRightPanel.setLayout(new BorderLayout(0, 0));
-        panel2.add(toolBarRightPanel, BorderLayout.EAST);
+        panel3.add(toolBarRightPanel, BorderLayout.EAST);
         cursorIndicatorLabel = new JLabel();
         cursorIndicatorLabel.setHorizontalAlignment(0);
         cursorIndicatorLabel.setHorizontalTextPosition(0);
@@ -658,7 +721,7 @@ public class JEditor {
         toolBarRightPanel.add(cursorIndicatorLabel, BorderLayout.CENTER);
         toolBarMidPanel = new JPanel();
         toolBarMidPanel.setLayout(new BorderLayout(0, 0));
-        panel2.add(toolBarMidPanel, BorderLayout.CENTER);
+        panel3.add(toolBarMidPanel, BorderLayout.CENTER);
         statusLabel = new JLabel();
         statusLabel.setHorizontalAlignment(0);
         statusLabel.setHorizontalTextPosition(0);
@@ -680,13 +743,13 @@ public class JEditor {
         settingsToolBar.setRollover(true);
         settingsToolBar.putClientProperty("JToolBar.isRollover", Boolean.TRUE);
         settingsToolBarScrollPane.setViewportView(settingsToolBar);
-        final JPanel panel3 = new JPanel();
-        panel3.setLayout(new BorderLayout(0, 5));
-        panel3.setBackground(new Color(-1250068));
-        panel3.setMaximumSize(new Dimension(2147483647, 32));
-        panel3.setMinimumSize(new Dimension(399, 27));
-        panel3.setPreferredSize(new Dimension(413, 32));
-        settingsToolBar.add(panel3);
+        final JPanel panel4 = new JPanel();
+        panel4.setLayout(new BorderLayout(0, 5));
+        panel4.setBackground(new Color(-1250068));
+        panel4.setMaximumSize(new Dimension(2147483647, 32));
+        panel4.setMinimumSize(new Dimension(399, 27));
+        panel4.setPreferredSize(new Dimension(413, 32));
+        settingsToolBar.add(panel4);
         editorViewSettingsPanel = new JPanel();
         editorViewSettingsPanel.setLayout(new BorderLayout(0, 0));
         editorViewSettingsPanel.setBackground(new Color(-1250068));
@@ -694,7 +757,7 @@ public class JEditor {
         editorViewSettingsPanel.setEnabled(true);
         editorViewSettingsPanel.setMinimumSize(new Dimension(389, 27));
         editorViewSettingsPanel.setPreferredSize(new Dimension(403, 32));
-        panel3.add(editorViewSettingsPanel, BorderLayout.CENTER);
+        panel4.add(editorViewSettingsPanel, BorderLayout.CENTER);
         stylesOptionPane = new JPanel();
         stylesOptionPane.setLayout(new GridBagLayout());
         editorViewSettingsPanel.add(stylesOptionPane, BorderLayout.CENTER);
@@ -771,7 +834,7 @@ public class JEditor {
         defaultComboBoxModel3.addElement("Customize...");
         backgroundSelectorComboBox.setModel(defaultComboBoxModel3);
         backgroundSelectorComboBox.setPreferredSize(new Dimension(80, 27));
-        backgroundSelectorComboBox.setSelectedIndex(1);
+        backgroundSelectorComboBox.setSelectedIndex(0);
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
         gbc.gridy = 0;
@@ -796,9 +859,6 @@ public class JEditor {
         if (fontStyleSelectorComboBoxFont != null) fontStyleSelectorComboBox.setFont(fontStyleSelectorComboBoxFont);
         fontStyleSelectorComboBox.setMinimumSize(new Dimension(64, 27));
         final DefaultComboBoxModel defaultComboBoxModel4 = new DefaultComboBoxModel();
-        defaultComboBoxModel4.addElement("Regular");
-        defaultComboBoxModel4.addElement("Bold");
-        defaultComboBoxModel4.addElement("Italic/Oblique");
         fontStyleSelectorComboBox.setModel(defaultComboBoxModel4);
         fontStyleSelectorComboBox.setPreferredSize(new Dimension(108, 27));
         gbc = new GridBagConstraints();
@@ -810,9 +870,9 @@ public class JEditor {
         windowManagerPane = new JPanel();
         windowManagerPane.setLayout(new BorderLayout(0, 0));
         editorViewSettingsPanel.add(windowManagerPane, BorderLayout.WEST);
-        final JPanel panel4 = new JPanel();
-        panel4.setLayout(new GridBagLayout());
-        windowManagerPane.add(panel4, BorderLayout.CENTER);
+        final JPanel panel5 = new JPanel();
+        panel5.setLayout(new GridBagLayout());
+        windowManagerPane.add(panel5, BorderLayout.CENTER);
         newButton = new JButton();
         newButton.setMaximumSize(new Dimension(48, 27));
         newButton.setMinimumSize(new Dimension(32, 27));
@@ -824,7 +884,7 @@ public class JEditor {
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel4.add(newButton, gbc);
+        panel5.add(newButton, gbc);
         openButton = new JButton();
         openButton.setMaximumSize(new Dimension(48, 27));
         openButton.setMinimumSize(new Dimension(32, 27));
@@ -836,7 +896,7 @@ public class JEditor {
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel4.add(openButton, gbc);
+        panel5.add(openButton, gbc);
         saveButton = new JButton();
         saveButton.setMaximumSize(new Dimension(48, 27));
         saveButton.setMinimumSize(new Dimension(32, 27));
@@ -848,7 +908,7 @@ public class JEditor {
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel4.add(saveButton, gbc);
+        panel5.add(saveButton, gbc);
         closeButton = new JButton();
         closeButton.setMinimumSize(new Dimension(12, 27));
         closeButton.setPreferredSize(new Dimension(27, 27));
@@ -857,7 +917,7 @@ public class JEditor {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel4.add(closeButton, gbc);
+        panel5.add(closeButton, gbc);
     }
 
     /**

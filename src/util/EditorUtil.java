@@ -377,17 +377,15 @@ public class EditorUtil {
         return pos;
     }
 
-    public int search(String pattern, int start){
+    public int search(String pattern, int start, boolean hasFoundBefore){
         //String text = (isEditorSelected()) ? editor.getMainEditorPane().getSelectedText() : editor.getMainEditorPane().getText();
         String text = editor.getMainEditorPane().getText().substring(start);
         int pos = search(text, pattern);
-        if(pos != -1) {
-            editor.getMainEditorPane().setSelectionStart(pos + start);
-            editor.getMainEditorPane().setSelectionEnd(pos + start + pattern.length());
-            editor.getSearchTextField().setBackground(Color.YELLOW);
-            //editor.getStatusLabel().setText(Strings_zh_CN.EDITOR_STATUS_SEARCH_TEXT_0);
-        }   else{
-            editor.getSearchTextField().setBackground(Color.PINK);
+        if(pos == -1) {
+            if(hasFoundBefore){
+                //deal with the end of find
+                return search(pattern, 0, false);
+            }
         }
         return pos + start;
     }

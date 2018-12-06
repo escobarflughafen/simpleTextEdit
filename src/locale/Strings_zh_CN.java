@@ -6,6 +6,10 @@ public class Strings_zh_CN {
     public static final String FULLSTOP_MARK = "。";
     public static final String DIAG_INDICATOR = "...";
 
+    public static final String FONT_STYLE_REGULAR = "常规";
+    public static final String FONT_STYLE_BOLD = "粗体";
+    public static final String FONT_STYLE_ITALIC = "斜体";
+    public static final String FONT_STYLE_OBLIQUE = "仿斜体";
 
     public static final String MENU_FILE = "文件";
     public static final String MENU_FILE_NEW = "新建";
@@ -25,6 +29,7 @@ public class Strings_zh_CN {
     public static final String MENU_EDIT_FINDNEXT = "查找下一个";
     public static final String MENU_EDIT_FINDPREV = "查找上一个";
     public static final String MENU_EDIT_REPLACE = "替换" + DIAG_INDICATOR;
+    public static final String MENU_EDIT_FIND_AND_REPLACE = "查找与" + MENU_EDIT_REPLACE;
     public static final String MENU_EDIT_TRANSFORMATIONS = "变换";
     public static final String MENU_EDIT_TRANSFORMATIONS_UPPERCASE = "转换为大写";
     public static final String MENU_EDIT_TRANSFORMATIONS_LOWERCASE = "转换为小写";
