@@ -26,13 +26,7 @@ public class Searcher {
         boolean found = editor.search(keyWordTextField.getText());
         if (found) {
             keyWordTextField.setBackground(Color.YELLOW);
-            int lineNum = 0;
-            try {
-                lineNum = editor.getMainEditorPane().getLineOfOffset(editor.getMainEditorPane().getCaretPosition());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            resultLabel.setText(Strings_zh_CN.EDITOR_STATUS_SEARCH_TEXT_0 + Strings_zh_CN.COMMA_MARK + Strings_zh_CN.EDITOR_STATUS_SEARCH_TEXT_POS + "第 " + (lineNum + 1) + " 行");
+            resultLabel.setText(Strings_zh_CN.EDITOR_STATUS_SEARCH_TEXT_0 + Strings_zh_CN.COMMA_MARK + Strings_zh_CN.EDITOR_STATUS_SEARCH_TEXT_POS + editor.getCursorIndicatorLabel().getText());
         } else {
             keyWordTextField.setBackground(Color.PINK);
             resultLabel.setText(Strings_zh_CN.EDITOR_STATUS_SEARCH_NOTFOUND);
@@ -40,20 +34,34 @@ public class Searcher {
     }
 
     private void replace() {
+        if (editor.getMainEditorPane().getSelectionStart() != editor.getMainEditorPane().getSelectionEnd() && editor.getMainEditorPane().getSelectedText().equals(keyWordTextField.getText())) {
+
+            editor.getEditorUtil().replaceWith(replaceWordTextField.getText());
+            resultLabel.setText(Strings_zh_CN.EDITOR_STATUS_REPLACED + Strings_zh_CN.COMMA_MARK + Strings_zh_CN.EDITOR_STATUS_SEARCH_TEXT_POS + editor.getCursorIndicatorLabel().getText());
+
+        } else {
+            boolean found = editor.search(keyWordTextField.getText());
+
+            if (found) {
+                int startpos = editor.getMainEditorPane().getSelectionStart();
+                editor.getEditorUtil().replaceWith(replaceWordTextField.getText());
+                editor.getMainEditorPane().setSelectionStart(startpos);
+                editor.getMainEditorPane().setSelectionEnd(startpos + replaceWordTextField.getText().length());
+                resultLabel.setText(Strings_zh_CN.EDITOR_STATUS_REPLACED + Strings_zh_CN.COMMA_MARK + Strings_zh_CN.EDITOR_STATUS_SEARCH_TEXT_POS + editor.getCursorIndicatorLabel().getText());
+
+            } else {
+                keyWordTextField.setBackground(Color.PINK);
+                resultLabel.setText(Strings_zh_CN.EDITOR_STATUS_SEARCH_NOTFOUND);
+            }
+        }
+    }
+
+    private void replaceAll() {
         boolean found = editor.search(keyWordTextField.getText());
         if (found) {
-            int startpos = editor.getMainEditorPane().getSelectionStart();
-            editor.getEditorUtil().replaceWith(replaceWordTextField.getText());
-            int lineNum = 0;
-            try {
-                lineNum = editor.getMainEditorPane().getLineOfOffset(editor.getMainEditorPane().getCaretPosition());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            editor.getMainEditorPane().setSelectionStart(startpos);
-            editor.getMainEditorPane().setSelectionEnd(startpos + replaceWordTextField.getText().length());
-            resultLabel.setText(Strings_zh_CN.EDITOR_STATUS_REPLACED + (lineNum + 1) + " 行");
 
+            editor.getMainEditorPane().setText(editor.getMainEditorPane().getText().replaceAll(keyWordTextField.getText(), replaceWordTextField.getText()));
+            resultLabel.setText(Strings_zh_CN.EDITOR_STATUS_ALL_REPLACED);
         } else {
             keyWordTextField.setBackground(Color.PINK);
             resultLabel.setText(Strings_zh_CN.EDITOR_STATUS_SEARCH_NOTFOUND);
@@ -69,12 +77,7 @@ public class Searcher {
         findButton.setText(Strings_zh_CN.SEARCH_COMMAND_FIND);
         replaceButton.setText(Strings_zh_CN.SEARCH_COMMAND_REPLACE);
         replaceAllButton.setText(Strings_zh_CN.SEARCH_COMMAND_REPLACE_ALL);
-        findButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                search();
-            }
-        });
+        findButton.addActionListener(e -> search());
 
         frame = new JFrame(Strings_zh_CN.SEARCH_WINDOW);
         frame.setContentPane(panel1);
@@ -109,12 +112,7 @@ public class Searcher {
                 keyWordTextField.setBackground(Color.WHITE);
             }
         });
-        replaceButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                replace();
-            }
-        });
+        replaceButton.addActionListener(e -> replace());
         replaceWordTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -124,6 +122,7 @@ public class Searcher {
                 }
             }
         });
+        replaceAllButton.addActionListener(e -> replaceAll());
     }
 
     {

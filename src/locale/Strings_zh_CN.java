@@ -23,7 +23,7 @@ public class Strings_zh_CN {
     public static final String MENU_EDIT_UNDO = "撤销";
     public static final String MENU_EDIT_REDO = "重做";
     public static final String MENU_EDIT_CUT = "剪切";
-    public static final String MENU_EDIT_COPY = "拷贝";
+    public static final String MENU_EDIT_COPY = "复制";
     public static final String MENU_EDIT_PASTE = "粘贴";
     public static final String MENU_EDIT_FIND = "查找" + DIAG_INDICATOR;
     public static final String MENU_EDIT_FINDNEXT = "查找下一个";
@@ -37,7 +37,7 @@ public class Strings_zh_CN {
     public static final String MENU_EDIT_JUMPTO_TITLE = "跳转到";
     public static final String MENU_EDIT_JUMPTO_MESG = "跳转到位置:";
 
-    public static final String MENU_TOOLS = "工具";
+    public static final String MENU_TOOLS = "设置";
     public static final String MENU_TOOLS_EDITORSETTINGS = "编辑器设置" + DIAG_INDICATOR;
     public static final String MENU_TOOLS_EDITORSETTINGS_TITLE = "编辑器设置";
     public static final String MENU_TOOLS_EDITORSETTINGS_FONTSETTINGS_HEADER = "字体设置";
@@ -90,7 +90,8 @@ public class Strings_zh_CN {
     public static final String EDITOR_STATUS_SEARCH_TEXT_1 = EDITOR_STATUS_SEARCH_TEXT_0 + "：找到 ";
     public static final String EDITOR_STATUS_SEARCH_TEXT_2 = " 处";
     public static final String EDITOR_STATUS_SEARCH_NOTFOUND = "查找失败：找不到要查找的内容";
-    public static final String EDITOR_STATUS_REPLACED = "替换成功，位于：第 ";
+    public static final String EDITOR_STATUS_REPLACED = "已替换";
+    public static final String EDITOR_STATUS_ALL_REPLACED = "已全部替换";
 
     public static final String SEARCH_WINDOW = "查找与替换";
     public static final String SEARCH_KEYWORD_LABEL = "关键字：";
