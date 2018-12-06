@@ -7,39 +7,41 @@
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="36148" layout-manager="GridLayoutManager" row-count="3" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
-        <constraints border-constraint="North"/>
+      <grid id="36148" layout-manager="GridLayoutManager" row-count="3" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="4" left="8" bottom="4" right="8"/>
+        <constraints border-constraint="Center"/>
         <properties/>
         <border type="none"/>
         <children>
           <component id="d5604" class="javax.swing.JButton" binding="replaceButton" default-binding="true">
             <constraints>
-              <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Replace"/>
             </properties>
           </component>
-          <component id="d465" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+          <component id="d465" class="javax.swing.JTextField" binding="replaceWordTextField">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+              <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
             <properties/>
           </component>
-          <component id="b91de" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+          <component id="b91de" class="javax.swing.JTextField" binding="keyWordTextField">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+              <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value=""/>
+            </properties>
           </component>
           <component id="ffbe7" class="javax.swing.JButton" binding="findButton" default-binding="true">
             <constraints>
-              <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Find"/>
@@ -47,36 +49,36 @@
           </component>
           <component id="877e0" class="javax.swing.JButton" binding="replaceAllButton" default-binding="true">
             <constraints>
-              <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Replace All"/>
             </properties>
           </component>
-          <component id="7756b" class="javax.swing.JRadioButton" binding="previousRadioButton" default-binding="true">
+          <component id="e8320" class="javax.swing.JLabel" binding="keyWordLabel">
             <constraints>
-              <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Previous"/>
+              <labelFor value="b91de"/>
+              <text value="Label"/>
             </properties>
           </component>
-          <component id="40ed5" class="javax.swing.JLabel">
+          <component id="a9a26" class="javax.swing.JLabel" binding="replaceWordLabel">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font style="1"/>
-              <text value="Direction:"/>
+              <labelFor value="d465"/>
+              <text value="Label"/>
             </properties>
           </component>
-          <component id="a476" class="javax.swing.JRadioButton" binding="nextRadioButton" default-binding="true">
+          <component id="95bde" class="javax.swing.JLabel" binding="resultLabel">
             <constraints>
-              <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <selected value="true"/>
-              <text value="Next"/>
+              <text value="Label"/>
             </properties>
           </component>
         </children>

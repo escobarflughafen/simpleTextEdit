@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="639fa23d-cac1-414b-9daf-89c0238f123f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/src/locale/Strings_zh_CN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/locale/Strings_zh_CN.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/EditorSettingPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/EditorSettingPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/JEditor.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/JEditor.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/JEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/JEditor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/Searcher.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Searcher.form" afterDir="false" />
@@ -21,9 +22,11 @@
       <file leaf-file-name="JEditor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ui/JEditor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
-              <caret line="329" column="37" lean-forward="true" selection-start-line="329" selection-start-column="37" selection-end-line="329" selection-end-column="37" />
+            <state relative-caret-position="4904">
+              <caret line="661" column="57" selection-start-line="661" selection-start-column="57" selection-end-line="661" selection-end-column="57" />
               <folding>
+                <element signature="e#3493#3494#0" expanded="true" />
+                <element signature="e#3520#3521#0" expanded="true" />
                 <element signature="e#4625#5008#0" expanded="true" />
                 <element signature="e#5007#5008#0" expanded="true" />
                 <element signature="e#5933#5934#0" expanded="true" />
@@ -76,6 +79,8 @@
                 <element signature="e#13495#13496#0" expanded="true" />
                 <element signature="e#13705#13706#0" expanded="true" />
                 <element signature="e#13759#13760#0" expanded="true" />
+                <element signature="e#17980#17981#0" expanded="true" />
+                <element signature="e#18029#18030#0" expanded="true" />
                 <element signature="e#15843#15844#0" expanded="true" />
                 <element signature="e#15905#15906#0" expanded="true" />
                 <element signature="e#16119#16120#0" expanded="true" />
@@ -124,9 +129,10 @@
                 <element signature="e#21968#21969#0" expanded="true" />
                 <element signature="e#22014#22015#0" expanded="true" />
                 <element signature="e#22057#22058#0" expanded="true" />
-                <element signature="initializer##0;class#JEditor#0" expanded="true" />
-                <element signature="e#38383#38384#0" expanded="true" />
-                <element signature="e#38412#38413#0" expanded="true" />
+                <element signature="e#22731#22732#0" expanded="true" />
+                <element signature="e#22769#22770#0" expanded="true" />
+                <element signature="e#40353#40354#0" expanded="true" />
+                <element signature="e#40382#40383#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -145,7 +151,7 @@
       <file leaf-file-name="WordCount.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ui/WordCount.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-93">
+            <state relative-caret-position="-102">
               <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
@@ -154,8 +160,8 @@
       <file leaf-file-name="EditorSettingPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ui/EditorSettingPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="112" column="83" lean-forward="true" selection-start-line="112" selection-start-column="83" selection-end-line="112" selection-end-column="83" />
+            <state relative-caret-position="347">
+              <caret line="167" column="47" lean-forward="true" selection-start-line="167" selection-start-column="47" selection-end-line="167" selection-end-column="77" />
             </state>
           </provider>
         </entry>
@@ -163,34 +169,49 @@
       <file leaf-file-name="EditorUtil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/util/EditorUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="369" column="62" selection-start-line="369" selection-start-column="62" selection-end-line="369" selection-end-column="62" />
+            <state relative-caret-position="161">
+              <caret line="400" column="16" selection-start-line="400" selection-start-column="16" selection-end-line="400" selection-end-column="16" />
               <folding>
                 <element signature="e#1342#1343#0" expanded="true" />
                 <element signature="e#1378#1379#0" expanded="true" />
                 <element signature="e#17813#17814#0" expanded="true" />
                 <element signature="e#17864#17865#0" expanded="true" />
+                <element signature="e#17687#17688#0" expanded="true" />
+                <element signature="e#17716#17717#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Searcher.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Searcher.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ui/Searcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="296">
+              <caret line="53" column="86" selection-start-line="53" selection-start-column="86" selection-end-line="53" selection-end-column="86" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2146#2147#0" expanded="true" />
+                <element signature="e#2186#2187#0" expanded="true" />
+                <element signature="e#2671#2972#0" expanded="true" />
+                <element signature="e#2971#2972#0" expanded="true" />
+                <element signature="e#3017#3234#0" expanded="true" />
+                <element signature="e#3233#3234#0" expanded="true" />
+                <element signature="e#3279#3492#0" expanded="true" />
+                <element signature="e#3491#3492#0" expanded="true" />
+                <element signature="e#4170#4171#0" expanded="true" />
+                <element signature="e#4211#4212#0" expanded="true" />
+                <element signature="e#4269#4432#0" expanded="true" />
+                <element signature="e#4431#4432#0" expanded="true" />
                 <element signature="initializer##0;class#Searcher#0" expanded="true" />
                 <element signature="initializer##0;class#Searcher#0" expanded="true" />
-                <element signature="e#1226#1227#0" expanded="true" />
-                <element signature="e#1255#1256#0" expanded="true" />
+                <element signature="e#8256#8257#0" expanded="true" />
+                <element signature="e#8285#8286#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Searcher.form" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Searcher.form" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ui/Searcher.form">
           <provider selected="true" editor-type-id="ui-designer" />
         </entry>
@@ -198,8 +219,8 @@
       <file leaf-file-name="Strings_zh_CN.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/locale/Strings_zh_CN.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="29" column="60" lean-forward="true" selection-start-line="29" selection-start-column="60" selection-end-line="29" selection-end-column="60" />
+            <state relative-caret-position="339">
+              <caret line="92" column="66" selection-start-line="92" selection-start-column="66" selection-end-line="92" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -224,12 +245,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>UNSAVED</find>
-      <find>24</find>
-      <find>autosav</find>
-      <find>Editor</find>
-      <find>len=</find>
-      <find>searchi</find>
       <find>sear</find>
       <find>searchbox</find>
       <find>searchTextField.add</find>
@@ -250,10 +265,16 @@
       <find>search</find>
       <find>searchTextField</find>
       <find>spinner.set</find>
-      <find>spinner</find>
       <find>edit</find>
+      <find>init</find>
+      <find>item</find>
       <find>p</find>
+      <find>POS</find>
+      <find>FindN</find>
+      <find>replace</find>
+      <find>placehold</find>
       <find>S</find>
+      <find>spinner</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -262,16 +283,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/ui/EditorSettingPanel.java" />
-        <option value="$PROJECT_DIR$/src/locale/Strings_zh_CN.java" />
         <option value="$PROJECT_DIR$/src/util/EditorUtil.java" />
-        <option value="$PROJECT_DIR$/src/ui/JEditor.java" />
-        <option value="$PROJECT_DIR$/src/ui/JEditor.form" />
         <option value="$PROJECT_DIR$/src/ui/Searcher.form" />
+        <option value="$PROJECT_DIR$/src/ui/JEditor.java" />
+        <option value="$PROJECT_DIR$/src/locale/Strings_zh_CN.java" />
+        <option value="$PROJECT_DIR$/src/ui/EditorSettingPanel.java" />
+        <option value="$PROJECT_DIR$/src/ui/JEditor.form" />
+        <option value="$PROJECT_DIR$/src/ui/Searcher.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="x" value="16" />
     <option name="y" value="190" />
     <option name="width" value="560" />
@@ -427,18 +449,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="800" extended-state="6" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" anchor="right" x="926" y="45" width="129" height="586" id="Palette" order="3" type="WINDOWED" visible="true" />
+      <window_info anchor="right" x="1080" y="113" width="129" height="586" id="Palette" order="3" weight="0.14375" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4953125" weight="0.32684824" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4953125" weight="0.32486632" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info id="Image Layers" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5067568" side_tool="true" weight="0.26604277" />
       <window_info anchor="right" id="Maven Projects" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49324325" visible="true" weight="0.2486631" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49324325" visible="true" weight="0.2486631" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info id="Capture Tool" order="4" />
@@ -477,6 +499,8 @@
         <state relative-caret-position="885">
           <caret line="76" column="33" selection-start-line="76" selection-start-column="33" selection-end-line="76" selection-end-column="33" />
           <folding>
+            <element signature="e#3493#3494#0" expanded="true" />
+            <element signature="e#3520#3521#0" expanded="true" />
             <element signature="e#4625#5008#0" expanded="true" />
             <element signature="e#5007#5008#0" expanded="true" />
             <element signature="e#5933#5934#0" expanded="true" />
@@ -529,6 +553,8 @@
             <element signature="e#13495#13496#0" expanded="true" />
             <element signature="e#13705#13706#0" expanded="true" />
             <element signature="e#13759#13760#0" expanded="true" />
+            <element signature="e#17980#17981#0" expanded="true" />
+            <element signature="e#18029#18030#0" expanded="true" />
             <element signature="e#15843#15844#0" expanded="true" />
             <element signature="e#15905#15906#0" expanded="true" />
             <element signature="e#16119#16120#0" expanded="true" />
@@ -577,9 +603,10 @@
             <element signature="e#21968#21969#0" expanded="true" />
             <element signature="e#22014#22015#0" expanded="true" />
             <element signature="e#22057#22058#0" expanded="true" />
-            <element signature="initializer##0;class#JEditor#0" expanded="true" />
-            <element signature="e#38383#38384#0" expanded="true" />
-            <element signature="e#38412#38413#0" expanded="true" />
+            <element signature="e#22731#22732#0" expanded="true" />
+            <element signature="e#22769#22770#0" expanded="true" />
+            <element signature="e#40353#40354#0" expanded="true" />
+            <element signature="e#40382#40383#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -600,6 +627,8 @@
             <element signature="e#1378#1379#0" expanded="true" />
             <element signature="e#17813#17814#0" expanded="true" />
             <element signature="e#17864#17865#0" expanded="true" />
+            <element signature="e#17687#17688#0" expanded="true" />
+            <element signature="e#17716#17717#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -677,61 +706,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/locale/Strings_zh_CN.java">
+    <entry file="file://$PROJECT_DIR$/src/ui/WordCount.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="29" column="60" lean-forward="true" selection-start-line="29" selection-start-column="60" selection-end-line="29" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/Searcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="initializer##0;class#Searcher#0" expanded="true" />
-            <element signature="initializer##0;class#Searcher#0" expanded="true" />
-            <element signature="e#1226#1227#0" expanded="true" />
-            <element signature="e#1255#1256#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-102">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/util/EditorUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="369" column="62" selection-start-line="369" selection-start-column="62" selection-end-line="369" selection-end-column="62" />
+        <state relative-caret-position="161">
+          <caret line="400" column="16" selection-start-line="400" selection-start-column="16" selection-end-line="400" selection-end-column="16" />
           <folding>
             <element signature="e#1342#1343#0" expanded="true" />
             <element signature="e#1378#1379#0" expanded="true" />
             <element signature="e#17813#17814#0" expanded="true" />
             <element signature="e#17864#17865#0" expanded="true" />
+            <element signature="e#17687#17688#0" expanded="true" />
+            <element signature="e#17716#17717#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/EditorSettingPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/locale/Strings_zh_CN.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="112" column="83" lean-forward="true" selection-start-line="112" selection-start-column="83" selection-end-line="112" selection-end-column="83" />
+        <state relative-caret-position="339">
+          <caret line="92" column="66" selection-start-line="92" selection-start-column="66" selection-end-line="92" selection-end-column="66" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/WordCount.java">
+    <entry file="file://$PROJECT_DIR$/src/ui/Searcher.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/EditorSettingPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-93">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="347">
+          <caret line="167" column="47" lean-forward="true" selection-start-line="167" selection-start-column="47" selection-end-line="167" selection-end-column="77" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/JEditor.form">
+      <provider selected="true" editor-type-id="ui-designer" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/EditorSettingPanel.form">
       <provider selected="true" editor-type-id="ui-designer" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/JEditor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="329" column="37" lean-forward="true" selection-start-line="329" selection-start-column="37" selection-end-line="329" selection-end-column="37" />
+        <state relative-caret-position="4904">
+          <caret line="661" column="57" selection-start-line="661" selection-start-column="57" selection-end-line="661" selection-end-column="57" />
           <folding>
+            <element signature="e#3493#3494#0" expanded="true" />
+            <element signature="e#3520#3521#0" expanded="true" />
             <element signature="e#4625#5008#0" expanded="true" />
             <element signature="e#5007#5008#0" expanded="true" />
             <element signature="e#5933#5934#0" expanded="true" />
@@ -784,6 +810,8 @@
             <element signature="e#13495#13496#0" expanded="true" />
             <element signature="e#13705#13706#0" expanded="true" />
             <element signature="e#13759#13760#0" expanded="true" />
+            <element signature="e#17980#17981#0" expanded="true" />
+            <element signature="e#18029#18030#0" expanded="true" />
             <element signature="e#15843#15844#0" expanded="true" />
             <element signature="e#15905#15906#0" expanded="true" />
             <element signature="e#16119#16120#0" expanded="true" />
@@ -832,18 +860,39 @@
             <element signature="e#21968#21969#0" expanded="true" />
             <element signature="e#22014#22015#0" expanded="true" />
             <element signature="e#22057#22058#0" expanded="true" />
-            <element signature="initializer##0;class#JEditor#0" expanded="true" />
-            <element signature="e#38383#38384#0" expanded="true" />
-            <element signature="e#38412#38413#0" expanded="true" />
+            <element signature="e#22731#22732#0" expanded="true" />
+            <element signature="e#22769#22770#0" expanded="true" />
+            <element signature="e#40353#40354#0" expanded="true" />
+            <element signature="e#40382#40383#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/JEditor.form">
-      <provider selected="true" editor-type-id="ui-designer" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/Searcher.form">
-      <provider selected="true" editor-type-id="ui-designer" />
+    <entry file="file://$PROJECT_DIR$/src/ui/Searcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="53" column="86" selection-start-line="53" selection-start-column="86" selection-end-line="53" selection-end-column="86" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2146#2147#0" expanded="true" />
+            <element signature="e#2186#2187#0" expanded="true" />
+            <element signature="e#2671#2972#0" expanded="true" />
+            <element signature="e#2971#2972#0" expanded="true" />
+            <element signature="e#3017#3234#0" expanded="true" />
+            <element signature="e#3233#3234#0" expanded="true" />
+            <element signature="e#3279#3492#0" expanded="true" />
+            <element signature="e#3491#3492#0" expanded="true" />
+            <element signature="e#4170#4171#0" expanded="true" />
+            <element signature="e#4211#4212#0" expanded="true" />
+            <element signature="e#4269#4432#0" expanded="true" />
+            <element signature="e#4431#4432#0" expanded="true" />
+            <element signature="initializer##0;class#Searcher#0" expanded="true" />
+            <element signature="initializer##0;class#Searcher#0" expanded="true" />
+            <element signature="e#8256#8257#0" expanded="true" />
+            <element signature="e#8285#8286#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">

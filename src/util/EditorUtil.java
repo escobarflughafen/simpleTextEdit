@@ -3,6 +3,7 @@ import locale.Strings_zh_CN;
 import model.*;
 import ui.EditorSettingPanel;
 import ui.JEditor;
+import ui.Searcher;
 import ui.WordCount;
 
 import javax.swing.*;
@@ -477,5 +478,9 @@ public class EditorUtil {
 
     public void openEditorSetting(){
         new EditorSettingPanel(this.editor);
+    }
+
+    public void openFindAndReplace(){
+        new Searcher(this.editor);
     }
 }

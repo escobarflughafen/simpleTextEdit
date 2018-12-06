@@ -68,34 +68,38 @@ public class JEditor {
     private String lastSearch;
     private int lastSearchPos;
     private int continueSearchPos;
+    private int lastCaretPos = 0;
 
 
-    private void search(KeyEvent e) {
-        int currentPos = continueSearchPos;
-        if (e.getKeyChar() == '\n') {
-            if (!searchTextField.getText().equals(lastSearch)) {
-                continueSearchPos = 0;
-                lastSearch = searchTextField.getText();
-            }
-            int findAt = editorUtil.search(searchTextField.getText(), currentPos, (currentPos != 0 || currentPos != -1));
-            if (findAt != -1) {
-                searchTextField.setBackground(Color.YELLOW);
-                textEditorPane.setSelectionStart(findAt);
-                textEditorPane.setSelectionEnd(findAt + lastSearch.length());
-                try {
-                    textEditorPane.getHighlighter().removeAllHighlights();
-                    textEditorPane.getHighlighter().addHighlight(findAt, findAt + lastSearch.length(), new DefaultHighlighter.DefaultHighlightPainter(Color.GREEN));
-                } catch (BadLocationException ble) {
-                    ble.printStackTrace();
-                }
-            } else {
-                searchTextField.setBackground(Color.PINK);
-            }
-            continueSearchPos = findAt + lastSearch.length();
-            if (continueSearchPos == -1 || continueSearchPos >= textEditorPane.getText().length()) {
-                continueSearchPos = 0;
+    public boolean search(String pattern) {
+        boolean found = false;
+        int currentPos = lastCaretPos;
+        System.out.println(lastCaretPos);
+        if (!pattern.equals(lastSearch)) {
+            continueSearchPos = 0;
+            lastSearch = pattern;
+        }
+        int findAt = editorUtil.search(pattern, currentPos, (currentPos != -1));
+        if (findAt != -1) {
+            found = true;
+            textEditorPane.setSelectionStart(findAt);
+            textEditorPane.setSelectionEnd(findAt + lastSearch.length());
+            try {
+                textEditorPane.getHighlighter().removeAllHighlights();
+                textEditorPane.getHighlighter().addHighlight(findAt, findAt + lastSearch.length(), new DefaultHighlighter.DefaultHighlightPainter(Color.GREEN));
+            } catch (BadLocationException ble) {
+                ble.printStackTrace();
             }
         }
+        continueSearchPos = findAt + lastSearch.length();
+        if (continueSearchPos == -1 || continueSearchPos >= textEditorPane.getText().length()) {
+            continueSearchPos = 0;
+        }
+        return found;
+    }
+
+    public boolean searchAll(String pattern) {
+        return true;
     }
 
     public JEditor() {
@@ -126,28 +130,7 @@ public class JEditor {
                 searchTextField.setBackground(Color.WHITE);
                 int currentPos = continueSearchPos;
                 if (e.getKeyChar() == '\n') {
-                    if (!searchTextField.getText().equals(lastSearch)) {
-                        continueSearchPos = 0;
-                        lastSearch = searchTextField.getText();
-                    }
-                    int findAt = editorUtil.search(searchTextField.getText(), currentPos, (currentPos != 0 || currentPos != -1));
-                    if (findAt != -1) {
-                        searchTextField.setBackground(Color.YELLOW);
-                        textEditorPane.setSelectionStart(findAt);
-                        textEditorPane.setSelectionEnd(findAt + lastSearch.length());
-                        try {
-                            textEditorPane.getHighlighter().removeAllHighlights();
-                            textEditorPane.getHighlighter().addHighlight(findAt, findAt + lastSearch.length(), new DefaultHighlighter.DefaultHighlightPainter(Color.GREEN));
-                        } catch (BadLocationException ble) {
-                            ble.printStackTrace();
-                        }
-                    } else {
-                        searchTextField.setBackground(Color.PINK);
-                    }
-                    continueSearchPos = findAt + lastSearch.length();
-                    if (continueSearchPos == -1 || continueSearchPos >= textEditorPane.getText().length()) {
-                        continueSearchPos = 0;
-                    }
+                    search(searchTextField.getText());
                 }
 
                 //update continueSearchPos
@@ -260,7 +243,7 @@ public class JEditor {
             @Override
             public void caretUpdate(CaretEvent e) {
                 editorUtil.fileAutoSave();
-
+                lastCaretPos = textEditorPane.getCaretPosition();
                 try {
                     if (textEditorPane.getSelectionStart() != textEditorPane.getSelectionEnd()) {
                         wordCountButton.setText(textEditorPane.getSelectedText().length() + "/" + String.valueOf(fileUtil.wc()));
@@ -437,9 +420,14 @@ public class JEditor {
             }
         });
         menuBar.getMenu(1).addSeparator();
-        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FIND_AND_REPLACE));
-        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FINDNEXT));
-        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FINDPREV));
+        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FIND_AND_REPLACE)).addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editorUtil.openFindAndReplace();
+            }
+        });
+        //menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FINDNEXT));
+        //menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FINDPREV));
         JMenu transformationMenu = new JMenu(Strings_zh_CN.MENU_EDIT_TRANSFORMATIONS);
         menuBar.getMenu(1).add(transformationMenu);
         transformationMenu.add(new JMenuItem(Strings_zh_CN.MENU_EDIT_TRANSFORMATIONS_UPPERCASE)).addActionListener(new ActionListener() {
@@ -622,6 +610,10 @@ public class JEditor {
 
     public JTextField getSearchTextField() {
         return this.searchTextField;
+    }
+
+    public EditorUtil getEditorUtil() {
+        return this.editorUtil;
     }
 
     {
@@ -818,8 +810,8 @@ public class JEditor {
         if (backgroundSelectorComboBoxFont != null) backgroundSelectorComboBox.setFont(backgroundSelectorComboBoxFont);
         backgroundSelectorComboBox.setMinimumSize(new Dimension(64, 27));
         final DefaultComboBoxModel defaultComboBoxModel3 = new DefaultComboBoxModel();
-        defaultComboBoxModel3.addElement("Black");
         defaultComboBoxModel3.addElement("White");
+        defaultComboBoxModel3.addElement("Black");
         defaultComboBoxModel3.addElement("Red");
         defaultComboBoxModel3.addElement("Teal");
         defaultComboBoxModel3.addElement("Green");

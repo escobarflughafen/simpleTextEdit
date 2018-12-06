@@ -57,12 +57,11 @@ public class EditorSettingPanel {
 
 
         this.editor = editor;
-        frame = new JFrame("Editor Settings");
+        frame = new JFrame(Strings_zh_CN.MENU_TOOLS_EDITORSETTINGS_TITLE);
         frame.setContentPane(panel1);
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setMinimumSize(new Dimension(320, 240));
         frame.setPreferredSize(new Dimension(480, 320));
-
+        frame.setResizable(false);
         frame.setLocation((int) (editor.getFrame().getLocation().getX() * 1.5), (int) (editor.getFrame().getLocation().getY() * 1.5));
 
         cancelButton.addActionListener(new ActionListener() {
@@ -166,7 +165,7 @@ public class EditorSettingPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 textFontModel.setSelectedItem("Courier");
-                fontStyleModel.setSelectedItem("Regular");
+                fontStyleModel.setSelectedItem(fontStyleModel.getElementAt(0));
                 fontSizeSpinner.setValue(16);
                 fgModel.setSelectedItem("Black");
                 bgModel.setSelectedItem("White");

@@ -69,7 +69,7 @@ public class Strings_zh_CN {
 
     public static final String EDITOR_UNTITLED_PLACEHOLDER = "Untitled";
     public static final String EDITOR_UNSAVED_PLACEHOLDER = "（未保存）";
-    public static final String EDITOR_SEARCHBOX_PLACEHOLDER = "搜索" + DIAG_INDICATOR;
+    public static final String EDITOR_SEARCHBOX_PLACEHOLDER = "查找" + DIAG_INDICATOR;
     public static final String EDITOR_SETTINGS_COMMAND_NEW = "新建";
     public static final String EDITOR_SETTINGS_COMMAND_OPEN = "打开";
     public static final String EDITOR_SETTINGS_COMMAND_SAVE = "保存";
@@ -84,10 +84,25 @@ public class Strings_zh_CN {
     public static final String EDITOR_SAVE_OVERRIDE_FILE_MESG = "覆盖文件" + QUESTION_MARK;
     public static final String EDITOR_SAVE_OVERRIDE_FILE_TITLE = "文件已存在";
 
+
+    public static final String EDITOR_STATUS_SEARCH_TEXT_POS = "位于：";
     public static final String EDITOR_STATUS_SEARCH_TEXT_0 = "查找成功";
     public static final String EDITOR_STATUS_SEARCH_TEXT_1 = EDITOR_STATUS_SEARCH_TEXT_0 + "：找到 ";
     public static final String EDITOR_STATUS_SEARCH_TEXT_2 = " 处";
     public static final String EDITOR_STATUS_SEARCH_NOTFOUND = "查找失败：找不到要查找的内容";
+    public static final String EDITOR_STATUS_REPLACED = "替换成功，位于：第 ";
+
+    public static final String SEARCH_WINDOW = "查找与替换";
+    public static final String SEARCH_KEYWORD_LABEL = "关键字：";
+    public static final String SEARCH_REPLACE_LABEL = "替换为：";
+    public static final String SEARCH_COMMAND_FIND = "查找";
+    public static final String SEARCH_COMMAND_REPLACE = "替换";
+    public static final String SEARCH_COMMAND_REPLACE_ALL = "替换全部";
+    public static final String SEARCH_LABEL_DIRECTION = "方向：";
+    public static final String SEARCH_RADIO_NEXT = "向后";
+    public static final String SEARCH_RADIO_PREV = "向前";
+
+
 
 
 }
