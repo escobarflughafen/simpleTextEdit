@@ -11,8 +11,6 @@ import java.util.Vector;
 
 import static java.lang.Boolean.TRUE;
 
-//TODO:弄明白為何強制退出（沒有按下保存）會導致文件空白
-
 public class TextFile{
     private Status status;
     private TextUtil textUtil;

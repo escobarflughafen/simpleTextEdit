@@ -21,10 +21,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.security.Key;
 import java.util.Vector;
 
 public class JEditor {
-    //privatep
     private EditorUtil editorUtil;
     private JFrame frame;
     private JPanel panel1;
@@ -72,8 +72,10 @@ public class JEditor {
     private int continueSearchPos;
     private int lastCaretPos = 0;
     private UndoHelper undoHelper;
+    private ActionMap actionMap;
 
     public boolean search(String pattern) {
+        actionMap = new ActionMap();
         boolean found = false;
         int currentPos = lastCaretPos;
         System.out.println(lastCaretPos);
@@ -203,6 +205,7 @@ public class JEditor {
             public void keyTyped(KeyEvent e) {
                 super.keyTyped(e);
                 editorUtil.setFileStatus(TextFile.Status.UNSAVED);
+
 
             }
         });
@@ -366,7 +369,9 @@ public class JEditor {
 
         menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_PASTE)).addActionListener(e -> textEditorPane.paste());
         menuBar.getMenu(1).addSeparator();
-        menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FIND_AND_REPLACE)).addActionListener(e -> editorUtil.openFindAndReplace());
+        JMenuItem findAndReplace = new JMenuItem(Strings_zh_CN.MENU_EDIT_FIND_AND_REPLACE);
+        findAndReplace.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK));
+        menuBar.getMenu(1).add(findAndReplace).addActionListener(e -> editorUtil.openFindAndReplace());
         //menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FINDNEXT));
         //menuBar.getMenu(1).add(new JMenuItem(Strings_zh_CN.MENU_EDIT_FINDPREV));
         JMenu transformationMenu = new JMenu(Strings_zh_CN.MENU_EDIT_TRANSFORMATIONS);
@@ -375,11 +380,14 @@ public class JEditor {
         transformationMenu.add(new JMenuItem(Strings_zh_CN.MENU_EDIT_TRANSFORMATIONS_LOWERCASE)).addActionListener(e -> editorUtil.replaceWith(textEditorPane.getSelectedText().toLowerCase()));
         menuBar.getMenu(1).addSeparator();
         JMenuItem jmpTo = new JMenuItem(Strings_zh_CN.MENU_EDIT_JUMPTO);
+        jmpTo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_J, KeyEvent.CTRL_DOWN_MASK));
         menuBar.getMenu(1).add(jmpTo);
         jmpTo.addActionListener(e -> editorUtil.caretJumpTo(Integer.valueOf(JOptionPane.showInputDialog(null, Strings_zh_CN.MENU_EDIT_JUMPTO_MESG, Strings_zh_CN.MENU_EDIT_JUMPTO_TITLE, JOptionPane.QUESTION_MESSAGE))));
 
         menuBar.add(new JMenu(Strings_zh_CN.MENU_TOOLS));
-        menuBar.getMenu(2).add(new JMenuItem(Strings_zh_CN.MENU_TOOLS_EDITORSETTINGS)).addActionListener(e -> editorUtil.openEditorSetting());
+        JMenuItem ediSet = new JMenuItem(Strings_zh_CN.MENU_TOOLS_EDITORSETTINGS);
+        ediSet.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK));
+        menuBar.getMenu(2).add(ediSet).addActionListener(e -> editorUtil.openEditorSetting());
         menuBar.getMenu(2).add(new JMenuItem(Strings_zh_CN.MENU_TOOLS_WORDCOUNT)).addActionListener(e -> editorUtil.openWordCounter());
         menuBar.getMenu(2).addSeparator();
         final JCheckBoxMenuItem ast = new JCheckBoxMenuItem(Strings_zh_CN.MENU_TOOLS_AUTOSAVE);
@@ -464,11 +472,24 @@ public class JEditor {
             }
         });
 
+//        KeyStroke gotoSearch = KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_DOWN_MASK);
+//        KeyStroke gotoSettings = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
+//        actionMap.put(gotoSearch, new AbstractAction() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                editorUtil.openFindAndReplace();
+//            }
+//        });
+//        actionMap.put(gotoSettings, new AbstractAction() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                editorUtil.openEditorSetting();
+//            }
+//        });
+
         frame.pack();
         frame.setVisible(true);
     }
-
-
 
 
     public void exit() {
@@ -721,10 +742,8 @@ public class JEditor {
         defaultComboBoxModel2.addElement("Black");
         defaultComboBoxModel2.addElement("White");
         defaultComboBoxModel2.addElement("Red");
-        defaultComboBoxModel2.addElement("Teal");
         defaultComboBoxModel2.addElement("Green");
         defaultComboBoxModel2.addElement("Cyan");
-        defaultComboBoxModel2.addElement("Violet");
         defaultComboBoxModel2.addElement("Pink");
         defaultComboBoxModel2.addElement("Light Gray");
         defaultComboBoxModel2.addElement("Gray");
@@ -748,10 +767,8 @@ public class JEditor {
         defaultComboBoxModel3.addElement("White");
         defaultComboBoxModel3.addElement("Black");
         defaultComboBoxModel3.addElement("Red");
-        defaultComboBoxModel3.addElement("Teal");
         defaultComboBoxModel3.addElement("Green");
         defaultComboBoxModel3.addElement("Cyan");
-        defaultComboBoxModel3.addElement("Violet");
         defaultComboBoxModel3.addElement("Pink");
         defaultComboBoxModel3.addElement("Light Gray");
         defaultComboBoxModel3.addElement("Gray");

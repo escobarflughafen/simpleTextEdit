@@ -28,10 +28,8 @@ public class EditorUtil {
         put("Black", Color.BLACK);
         put("White", Color.WHITE);
         put("Red", Color.RED);
-        put("Teal", Color.getColor("008080"));
         put("Green", Color.GREEN);
         put("Cyan", Color.cyan);
-        put("Violet", Color.getColor("800080"));
         put("Pink", Color.pink);
         put("Light Gray", Color.LIGHT_GRAY);
         put("Gray", Color.GRAY);
@@ -42,6 +40,16 @@ public class EditorUtil {
         put("Orange", Color.ORANGE);
 
     }};
+
+    public static Color customizeColor(boolean isBg){
+        Color color = (isBg) ? Color.WHITE : Color.BLACK;
+        JColorChooser colorChooser = new JColorChooser();
+        color = colorChooser.showDialog(null, "自定义颜色", (isBg) ? Color.WHITE : Color.BLACK);
+        if(color != null) {
+            color = colorChooser.getColor();
+        }
+        return color;
+    }
 
     public boolean isEditorSelected(){
         return editor.getMainEditorPane().getSelectionStart() != editor.getMainEditorPane().getSelectionEnd();
@@ -434,23 +442,6 @@ public class EditorUtil {
                 allSaved = true;
         }
         if(!allSaved) {
-            /*
-            int closeOperation = JOptionPane.showConfirmDialog(null, "Save all files?", "exit", JOptionPane.YES_NO_CANCEL_OPTION);
-            switch (closeOperation) {
-                case JOptionPane.OK_OPTION:
-                    for(int i=0; i<editor.getFiles().size(); i++){
-                        setMainEditorTagNum(i);
-                        closeWindow();
-                    }
-
-                case JOptionPane.NO_OPTION:
-                    editor.getFrame().dispose();
-                    editor.exit();
-                    break;
-
-                case JOptionPane.CANCEL_OPTION:
-                    break;
-            */
             int fileNum = editor.getFiles().size();
             for(int i=0; i<fileNum; i++){
                 setMainEditorTagNum(0);

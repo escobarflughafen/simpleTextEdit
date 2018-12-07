@@ -104,6 +104,4 @@ public class Strings_zh_CN {
     public static final String SEARCH_RADIO_PREV = "向前";
 
 
-
-
 }
